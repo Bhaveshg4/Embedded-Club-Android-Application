@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "156348170168",
+    "project_id": "embeddedclub",
+    "storage_bucket": "embeddedclub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156348170168:android:5ec7f596a9e314f4e9994d",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgcK0w2HRDfQeM2h2ySV61wIvy_6H1yEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
