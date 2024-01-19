@@ -1,27 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TeamMembersPage extends StatelessWidget {
-  final List<MemberData> members = [
-    MemberData('Tanmaya Kale'),
-    MemberData('Sarvesh Zade'),
-    MemberData('Isha Sinha'),
-    MemberData('Vedant Ghadole'),
-    MemberData('Aruja Singh'),
-    MemberData('Mahi Malviya'),
-    MemberData('Malika'),
-    MemberData('Ved'),
-    MemberData('Ved'),
-    MemberData('Bhavesh Gupta'),
-    MemberData('Aditya Mande'),
-    MemberData('Tanuj Sir'),
-    MemberData('Anushka Kawathekar'),
-    MemberData('Poorvi Verma'),
-    MemberData('Jagruti'),
-    MemberData('Sameer Hate'),
-    MemberData('Sayali Dongre'),
-    MemberData('  Shriraj Dekhate'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,67 +16,89 @@ class TeamMembersPage extends StatelessWidget {
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              'assets/background_team.jpg', // Replace with your image asset path
-              fit: BoxFit.cover,
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/background_home.jpg'),
+            fit: BoxFit.cover,
           ),
+        ),
+        child: FutureBuilder(
+          future: fetchTeamMembers(),
+          builder: (context, AsyncSnapshot<List<String>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } else {
+              List<String> members = snapshot.data ?? [];
 
-          // Page Content
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                for (var member in members)
-                  Padding(
-                    padding: EdgeInsets.only(left: 6, right: 6, top: 5),
-                    child: Container(
-                      height: 60,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: const LinearGradient(
-                          colors: [
-                            Colors.blue,
-                            Colors.purple
-                          ], // Adjust gradient colors
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    for (var member in members)
+                      Padding(
+                        padding: EdgeInsets.only(left: 6, right: 6, top: 5),
+                        child: Container(
+                          height: 60,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: const LinearGradient(
+                              colors: [Colors.blue, Colors.purple],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Icon(
+                                  Icons.account_circle,
+                                  color: Colors.white,
+                                  size: 40,
+                                ),
+                              ),
+                              Text(
+                                member,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      child: Row(
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.account_circle,
-                              color: Colors.white,
-                              size: 40,
-                            ),
-                          ),
-                          Text(
-                            member.name,
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                // Add more content widgets as needed
-              ],
-            ),
-          ),
-        ],
+                  ],
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
+  }
+
+  Future<List<String>> fetchTeamMembers() async {
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await FirebaseFirestore.instance.collection('names').get();
+
+    List<String> members = [];
+
+    for (QueryDocumentSnapshot<Map<String, dynamic>> document
+        in querySnapshot.docs) {
+      members.add(MemberData(document['namePeople']).name);
+    }
+
+    return members;
   }
 }
 
