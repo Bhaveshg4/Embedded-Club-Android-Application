@@ -128,7 +128,7 @@ class AchievementsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Achievements Of the Club',
+          'Achievements Of Club',
           style: TextStyle(color: Colors.white, fontSize: 27),
         ),
         centerTitle: true,

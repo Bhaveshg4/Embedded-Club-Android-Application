@@ -128,44 +128,54 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 40),
-                      InkWell(
-                        onTap: () async {
-                          try {
-                            await _googleSignIn.signIn();
-                            GoogleSignInAccount? user =
-                                _googleSignIn.currentUser;
-
-                            if (user != null) {
-                              await FirebaseFirestore.instance
-                                  .collection('signinusers')
-                                  .doc('googleSignInData')
-                                  .set({
-                                'email': user.email,
-                              });
-
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomePage(),
-                                ),
-                              );
-                            } else {
-                              print('Google Sign-In failed');
-                            }
-                          } catch (error) {
-                            print('Google Sign-In error: $error');
-                          }
-                        },
-                        child: Container(
-                          height: 100,
-                          width: 100,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(70),
-                            child: Image.asset("assets/Untitled.png"),
+                      const SizedBox(height: 20), // Increased space
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Sign In with Google: ",
+                            style: TextStyle(fontSize: 24, color: Colors.amber),
                           ),
-                        ),
-                      )
+                          const SizedBox(width: 10),
+                          InkWell(
+                            onTap: () async {
+                              try {
+                                await _googleSignIn.signIn();
+                                GoogleSignInAccount? user =
+                                    _googleSignIn.currentUser;
+
+                                if (user != null) {
+                                  await FirebaseFirestore.instance
+                                      .collection('signinusers')
+                                      .doc('googleSignInData')
+                                      .set({
+                                    'email': user.email,
+                                  });
+
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomePage(),
+                                    ),
+                                  );
+                                } else {
+                                  print('Google Sign-In failed');
+                                }
+                              } catch (error) {
+                                print('Google Sign-In error: $error');
+                              }
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.asset("assets/Untitled.png"),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
