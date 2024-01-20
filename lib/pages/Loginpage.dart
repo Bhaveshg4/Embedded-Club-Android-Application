@@ -3,15 +3,6 @@ import 'package:flutter_application_1/pages/homepage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: LoginPage(),
-    ),
-  );
-}
-
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key});
 
