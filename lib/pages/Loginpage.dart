@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/homepage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: LoginPage(),
+    ),
+  );
+}
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key});
@@ -90,12 +100,22 @@ class LoginPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 24.0),
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (formKey.currentState!.validate()) {
-                            String username = usernameController.text;
-                            String password = passwordController.text;
+                            String enteredUsername = usernameController.text;
+                            String enteredPassword = passwordController.text;
 
-                            if (username == 'U' && password == 'P') {
+                            DocumentSnapshot snapshot = await FirebaseFirestore
+                                .instance
+                                .collection('users')
+                                .doc('credentials')
+                                .get();
+
+                            String storedUsername = snapshot['username'];
+                            String storedPassword = snapshot['password'];
+
+                            if (enteredUsername == storedUsername &&
+                                enteredPassword == storedPassword) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -126,6 +146,13 @@ class LoginPage extends StatelessWidget {
                                 _googleSignIn.currentUser;
 
                             if (user != null) {
+                              await FirebaseFirestore.instance
+                                  .collection('signinusers')
+                                  .doc('googleSignInData')
+                                  .set({
+                                'email': user.email,
+                              });
+
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
