@@ -12,7 +12,6 @@ class LoginPage extends StatelessWidget {
 
     GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-    // Google Sign-In
     GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
     return Scaffold(
@@ -26,7 +25,6 @@ class LoginPage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          // Background Image
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -35,13 +33,9 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-
-          // Dark Overlay to Enhance Text Visibility
           Container(
             color: Colors.black.withOpacity(0.5),
           ),
-
-          // Transparent Login Form
           Center(
             child: Card(
               color: Color.fromARGB(0, 233, 227, 227),
@@ -56,7 +50,6 @@ class LoginPage extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Username TextField
                       TextFormField(
                         controller: usernameController,
                         decoration: const InputDecoration(
@@ -76,8 +69,6 @@ class LoginPage extends StatelessWidget {
                         },
                       ),
                       const SizedBox(height: 16.0),
-
-                      // Password TextField
                       TextFormField(
                         controller: passwordController,
                         obscureText: true,
@@ -98,19 +89,13 @@ class LoginPage extends StatelessWidget {
                         },
                       ),
                       const SizedBox(height: 24.0),
-
-                      // Login Button
                       ElevatedButton(
                         onPressed: () {
-                          // Validate form
                           if (formKey.currentState!.validate()) {
-                            // Form is valid, perform login
                             String username = usernameController.text;
                             String password = passwordController.text;
 
-                            // Replace the following check with your actual login logic
                             if (username == 'U' && password == 'P') {
-                              // Navigate to HomePage on successful login
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -118,7 +103,6 @@ class LoginPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              // Handle invalid login credentials
                               print('Invalid credentials');
                             }
                           }
@@ -134,8 +118,6 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 40),
-
-                      // Google Sign-In Button
                       InkWell(
                         onTap: () async {
                           try {
@@ -143,9 +125,7 @@ class LoginPage extends StatelessWidget {
                             GoogleSignInAccount? user =
                                 _googleSignIn.currentUser;
 
-                            // Perform additional logic or navigate to HomePage
                             if (user != null) {
-                              // Navigate to HomePage on successful login
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -153,7 +133,6 @@ class LoginPage extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              // Handle unsuccessful login
                               print('Google Sign-In failed');
                             }
                           } catch (error) {

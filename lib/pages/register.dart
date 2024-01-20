@@ -21,8 +21,7 @@ class RegisterPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/background_home.jpg'), // Replace with your image asset path
+            image: AssetImage('assets/background_home.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -61,22 +60,18 @@ class RegisterPage extends StatelessWidget {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () async {
-                  // Get the data from the controllers
                   String name = nameController.text;
                   String branch = branchController.text;
                   String section = sectionController.text;
                   String rollNumber = rollNumberController.text;
 
-                  // Validate if the fields are not empty
                   if (name.isEmpty ||
                       branch.isEmpty ||
                       section.isEmpty ||
                       rollNumber.isEmpty) {
-                    // You can show an error message or handle it as needed
                     return;
                   }
 
-                  // Save the data to Firestore
                   await FirebaseFirestore.instance
                       .collection('registrations')
                       .add({
@@ -84,10 +79,8 @@ class RegisterPage extends StatelessWidget {
                     'branch': branch,
                     'section': section,
                     'rollNumber': rollNumber,
-                    // Add additional fields as needed
                   });
 
-                  // You can also navigate to a success page or show a confirmation message
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text('Registration successful!'),
                   ));

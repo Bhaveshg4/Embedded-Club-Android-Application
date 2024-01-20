@@ -62,8 +62,7 @@ class _AchievementsPostCardState extends State<AchievementsPostCard> {
                     radius: 30,
                     backgroundImage: eventData['profileImage'] != null
                         ? AssetImage(eventData['profileImage'])
-                        : const AssetImage(
-                            'fallback_image.png'), // Provide a fallback image
+                        : const AssetImage('fallback_image.png'),
                   ),
                   const SizedBox(width: 15),
                   Expanded(

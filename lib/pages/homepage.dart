@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_application_1/pages/Achievements.dart';
 import 'package:flutter_application_1/pages/Events.dart';
 import 'package:flutter_application_1/pages/UpcomingEvents.dart';
+import 'package:flutter_application_1/pages/developer.dart';
 import 'package:flutter_application_1/pages/team.dart';
 
 void main() {
@@ -164,8 +165,8 @@ class _HomePageState extends State<HomePage> {
             _currentIndex = index;
           });
         },
-        items: const [
-          BottomNavigationBarItem(
+        items: [
+          const BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
               color: Colors.black,
@@ -174,8 +175,13 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
-            icon: InkWell(child: Icon(Icons.person, color: Colors.black)),
-            label: 'Profile',
+            icon: InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Developer()));
+                },
+                child: Icon(Icons.person, color: Colors.black)),
+            label: ' Developer Profile',
             backgroundColor: Colors.black,
           ),
         ],
