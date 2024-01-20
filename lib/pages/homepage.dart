@@ -174,16 +174,8 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.black),
+            icon: InkWell(child: Icon(Icons.person, color: Colors.black)),
             label: 'Profile',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.black,
-            ),
-            label: 'Settings',
             backgroundColor: Colors.black,
           ),
         ],

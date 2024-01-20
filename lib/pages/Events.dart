@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/pages/register.dart';
 
 class PostCard extends StatefulWidget {
   final String documentId;
@@ -103,9 +104,10 @@ class _PostCardState extends State<PostCard> {
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      // Implement registration logic here
-                      // This function will be called when the "Register" button is pressed
-                      // You can navigate to a registration page or perform any other action
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegisterPage()));
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
