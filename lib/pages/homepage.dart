@@ -6,6 +6,7 @@ import 'package:flutter_application_1/pages/Images.dart';
 import 'package:flutter_application_1/pages/UpcomingEvents.dart';
 import 'package:flutter_application_1/pages/developer.dart';
 import 'package:flutter_application_1/pages/team.dart';
+import 'package:flutter_application_1/pages/videos.dart';
 
 void main() {
   runApp(MyApp());
@@ -52,7 +53,8 @@ class _HomePageState extends State<HomePage> {
     GridItem(
         'Achievements', 'assets/acheivement.png', () => AchievementsPage()),
     GridItem('Upcoming Events', 'assets/next.png', () => UpcomingEventsPage()),
-    GridItem("Event Images", "assets/background_images.png", () => Images())
+    GridItem("Event Images", "assets/background_images.png", () => Images()),
+    GridItem("Video Tutorials", "assets/video.png", () => Videos()),
   ];
 
   @override
