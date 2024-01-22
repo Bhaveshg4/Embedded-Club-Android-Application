@@ -147,11 +147,11 @@ class LoginPage extends StatelessWidget {
                                 if (user != null) {
                                   await FirebaseFirestore.instance
                                       .collection('signinusers')
-                                      .doc('googleSignInData')
-                                      .set({
+                                      .add({
                                     'email': user.email,
                                   });
 
+                                  // ignore: use_build_context_synchronously
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
