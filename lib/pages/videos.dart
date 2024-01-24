@@ -25,6 +25,7 @@ class _VideosState extends State<Videos> {
 
   Future<void> initializeVideoPlayer() async {
     try {
+      // ignore: deprecated_member_use
       _videoPlayerController = VideoPlayerController.network(
           'https://drive.google.com/uc?export=view&id=1rI8qzTkl2nP_kojJblGJzJandHkuCdko');
       await _videoPlayerController.initialize();

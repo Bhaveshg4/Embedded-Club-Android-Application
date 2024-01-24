@@ -133,7 +133,7 @@ class LoginPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            "Sign In with Google: ",
+                            "or sign in with: ",
                             style: TextStyle(fontSize: 24, color: Colors.amber),
                           ),
                           const SizedBox(width: 10),
@@ -166,8 +166,8 @@ class LoginPage extends StatelessWidget {
                               }
                             },
                             child: Container(
-                              height: 40,
-                              width: 40,
+                              height: 100,
+                              width: 100,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Image.asset("assets/Untitled.png"),
