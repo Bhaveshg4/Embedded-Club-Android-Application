@@ -38,6 +38,7 @@ class _AchievementsPostCardState extends State<AchievementsPostCard> {
           return Text('No data found for documentId: ${widget.documentId}');
         } else {
           final eventData = snapshot.data!.data()!;
+          String profileImageUrl = eventData['profileImage'] ?? '';
 
           return Container(
             margin: const EdgeInsets.all(10),
@@ -54,65 +55,69 @@ class _AchievementsPostCardState extends State<AchievementsPostCard> {
                 ),
               ],
             ),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundImage: eventData['profileImage'] != null
-                        ? AssetImage(eventData['profileImage'])
-                        : const AssetImage('fallback_image.png'),
-                  ),
-                  const SizedBox(width: 15),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          eventData['achievementName'] ?? 'Event Name',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          'Date: ${eventData['date'] ?? 'No Date'}',
-                          style: const TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                          ),
-                        ),
-                        Text(
-                          'Location: ${eventData['location'] ?? 'No Location'}',
-                          style: const TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundImage: profileImageUrl.isNotEmpty
+                          ? NetworkImage(profileImageUrl)
+                              as ImageProvider<Object>?
+                          : AssetImage('fallback_image.png')
+                              as ImageProvider<Object>?,
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 15),
-              Text(
-                eventData['description'] ?? 'No Description',
-                style: const TextStyle(fontSize: 16),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Members Participated: ${eventData['teamMembers'] ?? 'Team Members'}',
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 14,
+                    const SizedBox(width: 15),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            eventData['achievementName'] ?? 'Event Name',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            'Date: ${eventData['date'] ?? 'No Date'}',
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 14,
+                            ),
+                          ),
+                          Text(
+                            'Location: ${eventData['location'] ?? 'No Location'}',
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 15),
-            ]),
+                const SizedBox(height: 15),
+                Text(
+                  eventData['description'] ?? 'No Description',
+                  style: const TextStyle(fontSize: 16),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Members Participated: ${eventData['teamMembers'] ?? 'Team Members'}',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 15),
+              ],
+            ),
           );
         }
       },

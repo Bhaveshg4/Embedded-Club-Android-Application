@@ -61,7 +61,7 @@ class _PostCardState extends State<PostCard> {
                   children: [
                     CircleAvatar(
                       radius: 30,
-                      backgroundImage: AssetImage(eventData['profileImage']),
+                      backgroundImage: NetworkImage(eventData['profileImage']),
                     ),
                     const SizedBox(width: 15),
                     Expanded(
