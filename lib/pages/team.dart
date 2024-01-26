@@ -6,7 +6,7 @@ class TeamMembersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: const Color.fromARGB(255, 52, 95, 214),
         title: const Text(
           'Team Members',
           style: TextStyle(

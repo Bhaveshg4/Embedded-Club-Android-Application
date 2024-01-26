@@ -24,7 +24,7 @@ class _ImagesState extends State<Images> {
           backgroundColor:
               Colors.transparent, // Set background color to transparent
           appBar: AppBar(
-            backgroundColor: Color.fromARGB(255, 86, 205, 226),
+            backgroundColor: const Color.fromARGB(255, 52, 95, 214),
             title: const Text("Event Photos"),
           ),
           body: StreamBuilder<QuerySnapshot>(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/pages/Achievements.dart';
 import 'package:flutter_application_1/pages/Events.dart';
 import 'package:flutter_application_1/pages/Images.dart';
@@ -7,28 +8,6 @@ import 'package:flutter_application_1/pages/UpcomingEvents.dart';
 import 'package:flutter_application_1/pages/developer.dart';
 import 'package:flutter_application_1/pages/team.dart';
 import 'package:flutter_application_1/pages/videos.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Embedded Club',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomePage(),
-    );
-  }
-}
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -40,12 +19,30 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
-  final List<String> carouselImages = [
-    'assets/image7.png',
-    'assets/image1.jpeg',
-    'assets/image4.jpg',
-    'assets/image9.jpg',
-  ];
+  List<String> carouselImages = [];
+
+  final CollectionReference _carouselImagesCollection =
+      FirebaseFirestore.instance.collection('carousel_images');
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCarouselImages();
+  }
+
+  void fetchCarouselImages() async {
+    try {
+      QuerySnapshot querySnapshot = await _carouselImagesCollection.get();
+      List<String> imageUrls =
+          querySnapshot.docs.map((doc) => doc['Curl'].toString()).toList();
+
+      setState(() {
+        carouselImages = imageUrls;
+      });
+    } catch (e) {
+      print('Error fetching carousel images: $e');
+    }
+  }
 
   final List<GridItem> gridItems = [
     GridItem('Team Members', 'assets/image_team.png', () => TeamMembersPage()),
@@ -87,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                     return Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(imagePath),
+                          image: NetworkImage(imagePath),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.circular(10.0),
