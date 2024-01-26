@@ -108,7 +108,7 @@ class _UpcomingEventPostCardState extends State<UpcomingEventPostCard> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 15),
                     ),
-                    child: const Text('Yet to Open Registrations'),
+                    child: const Text('Yet to open registrations'),
                   ),
                 ),
               ],

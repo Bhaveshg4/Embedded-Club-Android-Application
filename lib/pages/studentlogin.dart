@@ -15,7 +15,7 @@ class StudentLogin extends StatelessWidget {
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 52, 95, 214),
         title: const Text(
-          'Embedded Club Student Login',
+          ' Student Login',
           style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
         ),
       ),

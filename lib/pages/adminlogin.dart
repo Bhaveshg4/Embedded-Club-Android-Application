@@ -17,7 +17,7 @@ class AdminLogin extends StatelessWidget {
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 52, 95, 214),
         title: const Text(
-          'Embedded Club Login',
+          'Admin logIn',
           style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
         ),
       ),

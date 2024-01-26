@@ -17,8 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
-
   List<String> carouselImages = [];
 
   final CollectionReference _carouselImagesCollection =
@@ -59,7 +57,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 66, 65, 65),
+        backgroundColor: const Color.fromARGB(255, 52, 95, 214),
         title: const Text(
           'Embedded Club Home',
           style: TextStyle(color: Colors.white),
@@ -158,41 +156,38 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Developer()));
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Colors.amber.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(10)),
+                      height: 40,
+                      width: double.infinity,
+                      child: const Text(
+                        "Click for Developer's Info",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 21),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
               ],
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.grey,
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-          const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: Colors.black,
-            ),
-            label: 'Home',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Developer()));
-                },
-                child: Icon(Icons.person, color: Colors.black)),
-            label: ' Developer Profile',
-            backgroundColor: Colors.black,
-          ),
-        ],
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
       ),
     );
   }
