@@ -17,6 +17,7 @@ class TeamMembersPage extends StatelessWidget {
         ),
       ),
       body: Container(
+        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/background_home.jpg'),

@@ -24,6 +24,7 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
       body: Container(
+        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/background_home.jpg'),
@@ -31,7 +32,7 @@ class RegisterPage extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             child: Form(
               key: formKey,
@@ -42,9 +43,12 @@ class RegisterPage extends StatelessWidget {
                     child: TextFormField(
                       controller: eventNameController,
                       decoration: InputDecoration(
-                        labelText: 'Event Name',
-                        icon: Icon(Icons.event),
-                      ),
+                          labelText: 'Event Name',
+                          icon: Icon(
+                            Icons.event,
+                            color: Colors.white,
+                          ),
+                          labelStyle: TextStyle(color: Colors.white)),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Event Name is required';
@@ -58,9 +62,12 @@ class RegisterPage extends StatelessWidget {
                     child: TextFormField(
                       controller: nameController,
                       decoration: InputDecoration(
-                        labelText: 'Name',
-                        icon: Icon(Icons.person),
-                      ),
+                          labelText: 'Name',
+                          icon: Icon(
+                            Icons.person,
+                            color: Colors.white,
+                          ),
+                          labelStyle: TextStyle(color: Colors.white)),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Name is required';
@@ -74,9 +81,12 @@ class RegisterPage extends StatelessWidget {
                     child: TextFormField(
                       controller: branchController,
                       decoration: InputDecoration(
-                        labelText: 'Branch',
-                        icon: Icon(Icons.business),
-                      ),
+                          labelText: 'Branch',
+                          icon: Icon(
+                            Icons.business,
+                            color: Colors.white,
+                          ),
+                          labelStyle: TextStyle(color: Colors.white)),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Branch is required';
@@ -90,9 +100,12 @@ class RegisterPage extends StatelessWidget {
                     child: TextFormField(
                       controller: sectionController,
                       decoration: InputDecoration(
-                        labelText: 'Section',
-                        icon: Icon(Icons.list),
-                      ),
+                          labelText: 'Section',
+                          icon: Icon(
+                            Icons.list,
+                            color: Colors.white,
+                          ),
+                          labelStyle: TextStyle(color: Colors.white)),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Section is required';
@@ -106,9 +119,12 @@ class RegisterPage extends StatelessWidget {
                     child: TextFormField(
                       controller: rollNumberController,
                       decoration: InputDecoration(
-                        labelText: 'Roll Number',
-                        icon: Icon(Icons.confirmation_number),
-                      ),
+                          labelText: 'Roll Number',
+                          icon: Icon(
+                            Icons.confirmation_number,
+                            color: Colors.white,
+                          ),
+                          labelStyle: TextStyle(color: Colors.white)),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Roll Number is required';
@@ -182,7 +198,10 @@ class RegisterPage extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         gradient: LinearGradient(
-          colors: [Colors.blue, Colors.purple],
+          colors: [
+            Colors.blue.withOpacity(0.7),
+            Colors.purple.withOpacity(0.7)
+          ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),

@@ -3,13 +3,39 @@ import 'package:flutter_application_1/pages/homepage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class StudentLogin extends StatelessWidget {
+class StudentLogin extends StatefulWidget {
   const StudentLogin({Key? key});
 
   @override
-  Widget build(BuildContext context) {
-    GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  _StudentLoginState createState() => _StudentLoginState();
+}
 
+class _StudentLoginState extends State<StudentLogin> {
+  late Future<String?> greetingText;
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+
+  @override
+  void initState() {
+    super.initState();
+    greetingText = fetchGreetingText();
+  }
+
+  Future<String?> fetchGreetingText() async {
+    try {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('greeting')
+          .doc('greetingDocumentStudent')
+          .get();
+      return snapshot['text'];
+    } catch (e) {
+      // Handle errors (e.g., document not found)
+      print('Error fetching greeting text: $e');
+      return null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -44,6 +70,28 @@ class StudentLogin extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    FutureBuilder<String?>(
+                      future: greetingText,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator();
+                        } else if (snapshot.hasError || snapshot.data == null) {
+                          return SizedBox.shrink();
+                        } else {
+                          return Text(
+                            snapshot.data!,
+                            style: TextStyle(
+                                fontSize: 24,
+                                color:
+                                    const Color.fromARGB(255, 255, 255, 255)),
+                          );
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Container(
                       alignment: Alignment.center,
                       height: 40,
