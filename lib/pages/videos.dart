@@ -120,9 +120,7 @@ class VideoCard extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
                 ElevatedButton(
-                  onPressed: () {
-                    // Play video functionality can be added here
-                  },
+                  onPressed: () {},
                   child: const Text('Play Video'),
                 ),
               ],

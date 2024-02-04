@@ -15,14 +15,12 @@ class _ImagesState extends State<Images> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'assets/background_home.jpg'), // Replace with your background image asset
+            image: AssetImage('assets/background_home.jpg'),
             fit: BoxFit.cover,
           ),
         ),
         child: Scaffold(
-          backgroundColor:
-              Colors.transparent, // Set background color to transparent
+          backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 52, 95, 214),
             title: const Text("Event Photos"),
@@ -54,7 +52,7 @@ class _ImagesState extends State<Images> {
                             borderRadius: BorderRadius.circular(10),
                             child: Image.network(
                               documents[index]['imageUrl'] ??
-                                  'https://placehold.it/300x300', // Default image if URL is null
+                                  'https://placehold.it/300x300',
                               fit: BoxFit.cover,
                               loadingBuilder: (BuildContext context,
                                   Widget child,

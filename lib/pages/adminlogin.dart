@@ -28,7 +28,6 @@ class _AdminLoginState extends State<AdminLogin> {
           .get();
       return snapshot['text'];
     } catch (e) {
-      // Handle errors (e.g., document not found)
       print('Error fetching greeting text: $e');
       return null;
     }

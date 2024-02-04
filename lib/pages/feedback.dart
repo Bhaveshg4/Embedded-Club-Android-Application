@@ -121,13 +121,11 @@ class _FeedBackState extends State<FeedBack> {
       'feedback': _feedbackController.text,
     });
 
-    // Clear the text fields after submitting
     _nameController.clear();
     _branchController.clear();
     _emailController.clear();
     _feedbackController.clear();
 
-    // Show a success message or navigate to a success page
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Feedback submitted successfully!'),

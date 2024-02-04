@@ -153,7 +153,6 @@ class RegisterPage extends StatelessWidget {
                           'rollNumber': rollNumber,
                         });
 
-                        // Show a pop-up dialog for registration success
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -172,7 +171,6 @@ class RegisterPage extends StatelessWidget {
                           },
                         );
 
-                        // Clear the form fields after successful registration
                         eventNameController.clear();
                         nameController.clear();
                         branchController.clear();

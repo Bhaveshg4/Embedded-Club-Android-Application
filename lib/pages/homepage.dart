@@ -6,6 +6,7 @@ import 'package:flutter_application_1/pages/Events.dart';
 import 'package:flutter_application_1/pages/Images.dart';
 import 'package:flutter_application_1/pages/UpcomingEvents.dart';
 import 'package:flutter_application_1/pages/developer.dart';
+import 'package:flutter_application_1/pages/teachers.dart';
 import 'package:flutter_application_1/pages/team.dart';
 import 'package:flutter_application_1/pages/videos.dart';
 
@@ -43,6 +44,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<GridItem> gridItems = [
+    GridItem("Supporting Faculties", "assets/teachers.png", () => Teachers()),
     GridItem('Team Members', 'assets/image_team.png', () => TeamMembersPage()),
     GridItem('Events', 'assets/events.png', () => EventsPage()),
     GridItem(
