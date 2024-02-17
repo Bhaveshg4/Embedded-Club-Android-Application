@@ -122,7 +122,8 @@ class _FacultyInfoState extends State<FacultyInfo> {
                         style: TextStyle(fontSize: 14),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
+                        primary: Colors.blueAccent, // Reddit red color
+
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),
@@ -159,13 +160,13 @@ class _CommunityState extends State<Community> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF2F2F2),
+      backgroundColor: Color.fromARGB(255, 92, 88, 88),
       appBar: AppBar(
-        backgroundColor: Color(0xFFEA0027), // Reddit red color
+        backgroundColor: Colors.blueAccent, // Reddit red color
         title: Text(
-          "Electronics Engg. Community",
+          "Dept. Community page",
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 22,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
