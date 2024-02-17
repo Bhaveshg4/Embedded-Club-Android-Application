@@ -55,9 +55,9 @@ class _HomePageState extends State<HomePage> {
     GridItem('Upcoming Events', 'assets/next.png', () => UpcomingEventsPage()),
     GridItem("Event Images", "assets/background_images.png", () => Images()),
     GridItem("Video Tutorials", "assets/video.png", () => Videos()),
-    GridItem("Department Community", "assets/video.png", () => Community()),
-    GridItem("Announcements", "assets/video.png", () => Announcements()),
-    GridItem("Placement Info", "assets/video.png", () => Placement()),
+    GridItem("Department Community", "assets/Commity.jpg", () => Community()),
+    GridItem("Announcements", "assets/announcement.jpg", () => Announcements()),
+    GridItem("Placement Info", "assets/placement.jpeg", () => Placement()),
   ];
 
   @override
