@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/pages/Achievements.dart';
+import 'package:flutter_application_1/pages/Announcements.dart';
+import 'package:flutter_application_1/pages/Community/Community.dart';
 import 'package:flutter_application_1/pages/Events.dart';
 import 'package:flutter_application_1/pages/Images.dart';
 import 'package:flutter_application_1/pages/UpcomingEvents.dart';
 import 'package:flutter_application_1/pages/developer.dart';
+import 'package:flutter_application_1/pages/placement.dart';
 import 'package:flutter_application_1/pages/teachers.dart';
 import 'package:flutter_application_1/pages/team.dart';
 import 'package:flutter_application_1/pages/videos.dart';
@@ -52,6 +55,9 @@ class _HomePageState extends State<HomePage> {
     GridItem('Upcoming Events', 'assets/next.png', () => UpcomingEventsPage()),
     GridItem("Event Images", "assets/background_images.png", () => Images()),
     GridItem("Video Tutorials", "assets/video.png", () => Videos()),
+    GridItem("Department Community", "assets/video.png", () => Community()),
+    GridItem("Announcements", "assets/video.png", () => Announcements()),
+    GridItem("Placement Info", "assets/video.png", () => Placement()),
   ];
 
   @override
