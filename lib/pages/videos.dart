@@ -12,12 +12,21 @@ class Videos extends StatefulWidget {
 
 class _VideosState extends State<Videos> {
   late List<VideoInfo> videos;
+  late List<ChewieController> chewieControllers = [];
   late Future<void> _fetchVideoData;
 
   @override
   void initState() {
     super.initState();
     _fetchVideoData = fetchVideoData();
+  }
+
+  @override
+  void dispose() {
+    for (var controller in chewieControllers) {
+      controller.dispose();
+    }
+    super.dispose();
   }
 
   Future<void> fetchVideoData() async {
@@ -33,6 +42,18 @@ class _VideosState extends State<Videos> {
           url: data['videoUrl'],
         );
       }).toList();
+
+      chewieControllers = List.generate(
+        videos.length,
+        (index) => ChewieController(
+          videoPlayerController:
+              // ignore: deprecated_member_use
+              VideoPlayerController.network(videos[index].url),
+          aspectRatio: 16 / 9,
+          autoPlay: false,
+          looping: false,
+        ),
+      );
 
       setState(() {});
     } catch (e) {
@@ -60,7 +81,10 @@ class _VideosState extends State<Videos> {
             return ListView.builder(
               itemCount: videos.length,
               itemBuilder: (context, index) {
-                return VideoCard(videoInfo: videos[index]);
+                return VideoCard(
+                  videoInfo: videos[index],
+                  chewieController: chewieControllers[index],
+                );
               },
             );
           }
@@ -72,10 +96,12 @@ class _VideosState extends State<Videos> {
 
 class VideoCard extends StatelessWidget {
   final VideoInfo videoInfo;
+  final ChewieController chewieController;
 
   const VideoCard({
     Key? key,
     required this.videoInfo,
+    required this.chewieController,
   }) : super(key: key);
 
   @override
@@ -87,16 +113,7 @@ class VideoCard extends StatelessWidget {
         children: [
           AspectRatio(
             aspectRatio: 16 / 9,
-            child: Chewie(
-              controller: ChewieController(
-                videoPlayerController:
-                    // ignore: deprecated_member_use
-                    VideoPlayerController.network(videoInfo.url),
-                aspectRatio: 16 / 9,
-                autoPlay: false,
-                looping: false,
-              ),
-            ),
+            child: Chewie(controller: chewieController),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -120,7 +137,10 @@ class VideoCard extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // You can customize the play button functionality here
+                    chewieController.play();
+                  },
                   child: const Text('Play Video'),
                 ),
               ],

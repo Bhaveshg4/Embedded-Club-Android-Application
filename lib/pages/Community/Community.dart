@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FacultyInfo extends StatefulWidget {
+class FacultyInfo extends StatelessWidget {
+  final String docId;
   final String name;
   final String designation;
   final String imagePath;
@@ -9,21 +10,13 @@ class FacultyInfo extends StatefulWidget {
   final String postimage;
 
   const FacultyInfo({
+    required this.docId,
     required this.name,
     required this.designation,
     required this.imagePath,
     required this.description,
     required this.postimage,
   });
-
-  @override
-  _FacultyInfoState createState() => _FacultyInfoState();
-}
-
-class _FacultyInfoState extends State<FacultyInfo> {
-  int likes = 0;
-  int dislikes = 0;
-  late DocumentSnapshot facultySnapshot;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +40,7 @@ class _FacultyInfoState extends State<FacultyInfo> {
           ClipRRect(
             borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
             child: Image.network(
-              widget.postimage,
+              postimage,
               height: 200,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -62,10 +55,10 @@ class _FacultyInfoState extends State<FacultyInfo> {
                   contentPadding: EdgeInsets.all(0),
                   leading: CircleAvatar(
                     radius: 30,
-                    backgroundImage: NetworkImage(widget.imagePath),
+                    backgroundImage: NetworkImage(imagePath),
                   ),
                   title: Text(
-                    widget.name,
+                    name,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -73,7 +66,7 @@ class _FacultyInfoState extends State<FacultyInfo> {
                     ),
                   ),
                   subtitle: Text(
-                    widget.designation,
+                    designation,
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey[600],
@@ -82,54 +75,11 @@ class _FacultyInfoState extends State<FacultyInfo> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  widget.description,
+                  description,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey[800],
                   ),
-                ),
-                SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        setState(() {
-                          likes++;
-                        });
-                      },
-                      icon: Icon(Icons.thumb_up),
-                      label: Text(
-                        "Like ($likes)",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                    ),
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        setState(() {
-                          dislikes++;
-                        });
-                      },
-                      icon: Icon(Icons.thumb_down),
-                      label: Text(
-                        "Dislike ($dislikes)",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blueAccent, // Reddit red color
-
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ],
             ),
@@ -162,7 +112,7 @@ class _CommunityState extends State<Community> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 92, 88, 88),
       appBar: AppBar(
-        backgroundColor: Colors.blueAccent, // Reddit red color
+        backgroundColor: Colors.blueAccent,
         title: Text(
           "Dept. Community page",
           style: TextStyle(
@@ -171,7 +121,7 @@ class _CommunityState extends State<Community> {
             color: Colors.white,
           ),
         ),
-        elevation: 0, // Remove app bar shadow
+        elevation: 0,
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: facultyStream,
@@ -183,6 +133,7 @@ class _CommunityState extends State<Community> {
                   Map<String, dynamic> data =
                       document.data() as Map<String, dynamic>;
                   return FacultyInfo(
+                    docId: document.id,
                     name: data['name'] ?? "",
                     designation: data['designation'] ?? "",
                     imagePath: data['imagePath'] ?? "",
@@ -204,7 +155,7 @@ class _CommunityState extends State<Community> {
           // Add any action on button press
         },
         child: Icon(Icons.update),
-        backgroundColor: Color(0xFFEA0027),
+        backgroundColor: Color(0xFFEA0027).withOpacity(0.6),
       ),
     );
   }

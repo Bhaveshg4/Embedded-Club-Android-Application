@@ -6,7 +6,6 @@ import 'package:flutter_application_1/pages/Announcements.dart';
 import 'package:flutter_application_1/pages/Community/Community.dart';
 import 'package:flutter_application_1/pages/Events.dart';
 import 'package:flutter_application_1/pages/Images.dart';
-import 'package:flutter_application_1/pages/Studymaterial.dart';
 import 'package:flutter_application_1/pages/UpcomingEvents.dart';
 import 'package:flutter_application_1/pages/developer.dart';
 import 'package:flutter_application_1/pages/placement.dart';
@@ -59,8 +58,6 @@ class _HomePageState extends State<HomePage> {
     GridItem("Department Community", "assets/Commity.jpg", () => Community()),
     GridItem("Announcements", "assets/announcement.jpg", () => Announcements()),
     GridItem("Placement Info", "assets/placement.jpeg", () => Placement()),
-    GridItem(
-        "Study material", "assets/Studymaterial.jpeg", () => StudyMaterial()),
   ];
 
   @override
